@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biblioteca</title>
+    <link th:href="@{/webjars/bootstrap/3.1.0/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/webjars/bootstrap/3.1.0/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+</head>
+</head>
+<body>
+<div class="panel panel-default" style="margin: 10px">
+    <div class="panel-heading">
+        <h1 class="panel-title">Biblioteca</h1>
+    </div>
+    <div class="panel-body">
+        <h2>Livros Disponíveis</h2>
+        <ul>
+            <li th:each="livro : ${livros}">
+                <strong th:text="${livro.titulo}"></strong>: <span th:text="${livro.autor}"></span>
+            </li>
+        </ul>
+
+        <h2>Clientes</h2>
+        <ul>
+            <li th:each="cliente : ${clientes}">
+                <strong th:text="${cliente.nome}"></strong>:
+                <a th:href="@{/ver-emprestimos/{clienteId}(clienteId=${cliente.id})}">Ver Empréstimos</a>
+            </li>
+        </ul>
+
+        <h2>Empréstimos</h2>
+        <ul>
+            <li th:each="emprestimo : ${emprestimos}">
+                <strong th:text="${emprestimo.id}"></strong>:
+                <span th:text="${emprestimo.livro.titulo}"></span> para <span th:text="${emprestimo.cliente.nome}"></span>
+                <a th:href="@{/realizar-devolucao/{emprestimoId}(emprestimoId=${emprestimo.id})}">Devolver</a>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Scripts do jQuery e do Bootstrap no final da página -->
+<script th:src="@{/webjars/jquery/3.6.4/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.1.0/js/bootstrap.min.js}"></script>
+
+</body>
+</html>
